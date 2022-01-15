@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Warehouse</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Acme&family=Pacifico&display=swap");
+      .background {
+        background-attachment: fixed;
+        background-size: cover;
+        background-image: url("{{ url_for('static', filename= 'images/back.jpg') }}");
+      }
+      
+      .styled-font {
+        font-family: "Acme" !important;
+      }
+    </style>
+  </head>
+  <!-- body starts here -->
+
+  <body
+    class="background"
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh !important;
+    "
+  >
+    <div class="container">
+      <div class="jumbotron" style="background-color: rgba(255, 255, 255, 0.9)">
+        <a href="/" class="text-dark"
+          ><h1 class="display-3 styled-font">Warehouse</h1></a
+        >
+
+        <p class="lead"></p>
+        <p>Update product</p>
+        <hr class="my-2" />
+        <!-- update product form -->
+        <form method="POST">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="">Name</label>
+                <input
+                  type="text"
+                  value="{{data['name']}}"
+                  required
+                  class="form-control"
+                  name="name"
+                  id="name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="">Colors (use space to seperate colors)</label>
+                <input
+                  type="text"
+                  value="{% for color in data['colors'] %}{{color}} {% endfor %}"
+                  required
+                  class="form-control"
+                  name="colors"
+                  id="colors"
+                />
+              </div>
+              <div class="form-group">
+                <label for="">Location</label>
+                <input
+                  type="text"
+                  value="{{data['location']}}"
+                  required
+                  class="form-control"
+                  name="location"
+                  id="location"
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="">Count</label>
+                <input
+                  type="number"
+                  value="{{data['count']}}"
+                  required
+                  class="form-control"
+                  name="count"
+                  id="count"
+                />
+              </div>
+              <div class="form-group">
+                <label for="">Categories</label>
+                <select class="form-control" name="category" id="category">
+                  {% for category in categories %}
+                  <option>{{category}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="">Description</label>
+            <textarea
+              class="form-control"
+              value="{{data['description']}}"
+              name="description"
+              id="description"
+              rows="3"
+            ></textarea>
+          </div>
+          <input
+            type="submit"
+            class="btn btn-danger w-100"
+            value="Update product"
+          />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

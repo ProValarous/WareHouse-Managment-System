@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Warehouse</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Acme&family=Pacifico&display=swap");
+      .background {
+        background-attachment: fixed;
+        background-size: cover;
+        background-image: url("{{ url_for('static', filename= 'images/back.jpg') }}");
+      }
+    
+      .styled-font {
+        font-family: "Acme" !important;
+      }
+    </style>
+  </head>
+  <!-- body starts here -->
+  <body
+    class="background"
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh !important;
+    "
+  >
+    <div class="container">
+      <div class="jumbotron" style="background-color: rgba(255, 255, 255, 0.9)">
+        <a href="/" class="text-dark"
+          ><h1 class="display-3 styled-font">Warehouse</h1></a
+        >
+
+        <!-- product details container -->
+        <p>Product details</p>
+        <hr class="my-2" />
+        <p class="lead"></p>
+        <div class="row">
+          <div class="col">
+            <h3>
+              Product: {{data["name"]}} {% if data["newName"] != "" %} - New
+              name: {{data["newName"]}} {% endif %}
+            </h3>
+          </div>
+          <div class="col">
+            <div style="float: right !important">
+              {% if data["count"] != 0 %}
+              <a
+                name=""
+                id=""
+                class="btn btn-danger"
+                style="float: left"
+                href="/decreaseCount/{{data['name']}}"
+                role="button"
+                >-</a
+              >
+              {% endif %}
+              <h4 style="float: left !important" class="ml-2 mr-2 mt-1">
+                {{data["count"]}}
+              </h4>
+              <a
+                name=""
+                id=""
+                class="btn btn-danger"
+                href="/increaseCount/{{data['name']}}"
+                role="button"
+                >+</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <h5>Category: {{data["category"]}}</h5>
+          <h6>Location: {{data["location"]}}</h6>
+          <p>Description: {{data["description"]}}</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
